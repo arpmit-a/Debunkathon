@@ -56,7 +56,7 @@ def naivebayes(df):
         x_test=x_test.todense()
         classifier = GaussianNB() 
         classifier.fit(x_train, y_train)  
-        test_pred = model.predict(x_test)
+        test_pred = classifier.predict(x_test)
         return accuracy_score(y_test, test_pred),model
 
 def svm(df):
