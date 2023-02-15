@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 import time
 import urllib
 import os
-Path="C:/Users/user/Downloads/Debunkathon/chromedriver/chromedriver.exe"
+Path="/content/Debunkathon/Chromedriver/chromedriver.exe"
 os.makedirs("/content/images/")
 driver=webdriver.Chrome(executable_path=Path)
 def get_img_urls(url):
