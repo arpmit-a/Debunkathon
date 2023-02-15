@@ -9,7 +9,7 @@ def save_images(title):
     title = remove_punctuations(title)
     title=title.replace(" " ,"+")
     #we will search google news page with this titles.
-    download_by_urls(f"https://www.google.com/search?q={title}&source=lnms&tbm=nws&sa=X&ved=2ahUKEwjZmpa_pZD9AhXmTGwGHe89CWcQ_AUoAXoECAEQAw&biw=858&bih=932&dpr=1"))
+    download_by_urls(f"https://www.google.com/search?q={title}&source=lnms&tbm=nws&sa=X&ved=2ahUKEwjZmpa_pZD9AhXmTGwGHe89CWcQ_AUoAXoECAEQAw&biw=858&bih=932&dpr=1")
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
