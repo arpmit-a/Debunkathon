@@ -14,7 +14,6 @@ from sklearn import preprocessing
 nltk.download('wordnet')
 nltk.download('omw-1.4')
 ps = PorterStemmer()
-lemmatizer = WordNetLemmatizer()
 wordnet_map = {"N":wordnet.NOUN, "V": wordnet.VERB, "J": wordnet.ADJ, "R": wordnet.ADV}
 def get_data(df):
     cols=df.columns
@@ -51,37 +50,6 @@ def remove_freq_words(text,FREQUENT_WORDS):
 
 def stemming(text):
     return " ".join([ps.stem(word) for word in text.split()])
-
-def lemmatize_words(text):
-    # find pos tags
-    pos_text = pos_tag(text.split())
-    return " ".join([lemmatizer.lemmatize(word, wordnet_map.get(pos[0], wordnet.NOUN)) for word, pos in pos_text])
-
-def pos_tagger(nltk_tag):
-	if nltk_tag.startswith('J'):
-		return wordnet.ADJ
-	elif nltk_tag.startswith('V'):
-		return wordnet.VERB
-	elif nltk_tag.startswith('N'):
-		return wordnet.NOUN
-	elif nltk_tag.startswith('R'):
-		return wordnet.ADV
-	else:		
-		return None
-
-
-
-def wordnert(text):
-
-  pos_tagged = nltk.pos_tag(nltk.word_tokenize(text))
-  wordnet_tagged = list(map(lambda x: (x[0], pos_tagger(x[1])), pos_tagged))
-  lemmatized_sentence = []
-  for word, tag in wordnet_tagged:
-    if tag is None:
-	    lemmatized_sentence.append(word)
-    else:
-      lemmatized_sentence.append(lemmatizer.lemmatize(word, tag))
-      lemmatized_sentence = " ".join(lemmatized_sentence)
 
 def remove_url(text):
     return re.sub(r'https?://\S+|www\.\S+', '', text)
