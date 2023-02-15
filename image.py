@@ -5,7 +5,22 @@ import urllib
 import os
 Path="/content/Debunkathon/Chromedriver/chromedriver.exe"
 os.makedirs("/content/images/")
-driver=webdriver.Chrome(executable_path=Path)
+options = webdriver.ChromeOptions()
+#run Selenium in headless mode
+options.add_argument('--headless')
+options.add_argument('--no-sandbox')
+#overcome limited resource problems
+options.add_argument('--disable-dev-shm-usage')
+options.add_argument("lang=en")
+#open Browser in maximized mode
+options.add_argument("start-maximized")
+#disable infobars
+options.add_argument("disable-infobars")
+#disable extension
+options.add_argument("--disable-extensions")
+options.add_argument("--incognito")
+options.add_argument("--disable-blink-features=AutomationControlled")
+driver = webdriver.Chrome(options=options)
 def get_img_urls(url):
   image_urls=[]
   driver.get(url)
@@ -23,6 +38,3 @@ def download_by_urls(url):
     image_urls=get_img_urls(url)
     for i in range(len(image_urls)):
         urllib.request.urlretrieve(str(image_urls[i]),f"/content/images/image{i}.jpg".format(i))
-
-
-download_by_urls("https://www.google.com/search?q=The+Battle+of+New+York+Why+This+Primary+Matters&source=lnms&tbm=nws&sa=X&ved=2ahUKEwjZmpa_pZD9AhXmTGwGHe89CWcQ_AUoAXoECAEQAw&biw=858&bih=932&dpr=1")
